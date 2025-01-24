@@ -9,7 +9,7 @@ const contactFormSchema = z.object({
   name: z
     .string()
     .nonempty("Name is required")
-    .max(20, "Name should be less than 20 characters"),
+    .max(40, "Name should be less than 40 characters"),
   email: z
     .string()
     .nonempty("Email is required")

@@ -7,7 +7,10 @@ import axiosInstance from "../api/axiosInstance";
 
 // Zod schema for validation
 const feedbackSchema = z.object({
-  name: z.string().min(1, "Name is required").max(20, "Name is too long"),
+  name: z
+    .string()
+    .nonempty("Name is required")
+    .max(40, "Name should be less than 40 characters"),
   email: z.string().email("Invalid email address"),
   rating: z.number().min(1, "Rating is required").max(5, "Invalid rating"),
   comments: z.string().optional(),
