@@ -1,18 +1,42 @@
 import { AboutUs, Doctor } from "../assets/index";
+import { motion } from "framer-motion";
+
 export default function AboutPage() {
   return (
     <>
-      <section className="w-full max-w-screen-xl m-auto grid grid-cols-1 lg:grid-cols-2  gap-10 mt-[120px] xl:mt-[150px] px-5 ">
-        <img src={AboutUs} alt="" className=" rounded-2xl" />
+      <section className="w-full max-w-screen-xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-10 mt-[120px] xl:mt-[150px] px-5">
+        <motion.img
+          src={AboutUs}
+          alt="About DN Dental Clinic"
+          className="rounded-2xl"
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        />
 
-        <div className="flex justify-center ml-10  flex-col gap-5 lg:items-start items-center ">
+        <motion.div
+          className="flex justify-center ml-10 flex-col gap-5 lg:items-start items-center"
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <div className="flex flex-col gap-5">
-            <h2 className=" text-4xl font-bold sm:text-center lg:text-start">
+            <motion.h2
+              className="text-4xl font-bold sm:text-center lg:text-start"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               What you should know
-            </h2>
+            </motion.h2>
           </div>
 
-          <p className="sm:text-center leading-6 lg:text-start ">
+          <motion.p
+            className="sm:text-center leading-6 lg:text-start"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
             Welcome to our "About" page! At DN Dental Clinic, we are dedicated
             to providing high-quality dental care in a comfortable and friendly
             environment. Our experienced team prioritizes patient satisfaction
@@ -22,17 +46,41 @@ export default function AboutPage() {
             treatments, and discover our commitment to making dental care
             accessible for everyone. We look forward to helping you achieve a
             healthy, beautiful smile!
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
-      <section className="bg-primary mt-32">
-        <div className="w-full max-w-screen-xl m-auto grid grid-cols-1 lg:grid-cols-2  lg:gap-20 px-5  ">
-          <div className=" flex flex-col gap-10 justify-center py-20">
-            <h1 className="text-5xl font-bold text-white ">
+      <motion.section
+        className="bg-primary mt-32"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 1 }}
+      >
+        <div className="w-full max-w-screen-xl m-auto grid grid-cols-1 lg:grid-cols-2 lg:gap-20 px-5">
+          <motion.div
+            className="flex flex-col gap-10 justify-center py-20"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h1
+              className="text-5xl font-bold text-white"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
               Message from Our Doctor
-            </h1>
-            <p className="text-white leading-6">
+            </motion.h1>
+            <motion.p
+              className="text-white leading-6"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
               Welcome to DN Dental Clinic! As your dedicated dental care
               provider, my primary goal is to ensure that every patient feels
               comfortable, informed, and confident in their dental health. We
@@ -41,16 +89,32 @@ export default function AboutPage() {
               specialized procedures. Our friendly staff is committed to
               creating a warm and welcoming environment, guiding you through
               every step of your dental journey. Thank you for trusting us with
-              your care; together, let’s achieve a healthy, beautiful smile that
+              your care; together, let's achieve a healthy, beautiful smile that
               you can be proud of!
-            </p>
-            <p className="text-white">— Umashankar, DN Dental Clinic</p>
-          </div>
-          <div className="flex justify-center  relative">
-            <img src={Doctor} alt="" className=" lg:absolute lg:bottom-0 " />
+            </motion.p>
+            <motion.p
+              className="text-white"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              — Umashankar, DN Dental Clinic
+            </motion.p>
+          </motion.div>
+          <div className="flex justify-center relative">
+            <motion.img
+              src={Doctor}
+              alt="DN Dental Clinic Doctor"
+              className="lg:absolute lg:bottom-0"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, delay: 0.4 }}
+            />
           </div>
         </div>
-      </section>
+      </motion.section>
     </>
   );
 }
