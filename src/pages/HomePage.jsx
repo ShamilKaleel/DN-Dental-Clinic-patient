@@ -8,61 +8,101 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Location from "../components/Location";
 import SuccessMessage from "../components/SuccessMessage";
-
-export default function HomePage() {
+import { motion, AnimatePresence } from "framer-motion";
+export default function AnimatedHomePage() {
   const [showForm, setShowForm] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleFormSubmit = () => {
-    setIsSubmitted(true); // Set form submission state to true
-    // Close the form modal
-
-    // Automatically hide the success message after 3 seconds
+    setIsSubmitted(true);
     setTimeout(() => {
-      setIsSubmitted(false); // Reset the state to show the form again
+      setIsSubmitted(false);
     }, 2000);
   };
 
   return (
     <>
-      <section className="mt-24 px-5 ">
-        {" "}
+      <motion.section
+        className="mt-24 px-5"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
         <Hero />
-      </section>
+      </motion.section>
 
-      <section className="bg-primary px-5 mt-24">
+      <motion.section
+        className="bg-primary px-5 mt-24"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+      >
         <ResultBar />
-      </section>
+      </motion.section>
 
-      <section className="mt-24 px-5 flex flex-col gap-20">
-        <h1 className=" font-semibold text-primary text-center text-3xl lg:text-4xl">
-          Services we provide{" "}
-        </h1>
+      <motion.section
+        className="mt-24 px-5 flex flex-col gap-20"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.4 }}
+      >
+        <motion.h1
+          className="font-semibold text-primary text-center text-3xl lg:text-4xl"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.5 }}
+        >
+          Services we provide
+        </motion.h1>
         <Services />
-      </section>
+      </motion.section>
 
-      <section className="mt-24">
+      <motion.section
+        className="mt-24"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.6 }}
+      >
         <FeedbackBanner setShowForm={setShowForm} />
-      </section>
+      </motion.section>
 
-      {isSubmitted && (
-        <SuccessMessage /> // Show success message component if the form is submitted
-      )}
+      <AnimatePresence>
+        {isSubmitted && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <SuccessMessage />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {showForm && (
-        <FeedbackForm
-          onClose={() => setShowForm(false)}
-          onFormSubmit={handleFormSubmit}
-        />
-      )}
+      <AnimatePresence>
+        {showForm && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FeedbackForm
+              onClose={() => setShowForm(false)}
+              onFormSubmit={handleFormSubmit}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* <section className="  flex items-center justify-center mt-24">
-        <ReviewSlider />
-      </section> */}
-
-      <section className="mt-24">
+      <motion.section
+        className="mt-24"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.8 }}
+      >
         <Location />
-      </section>
+      </motion.section>
     </>
   );
 }
