@@ -12,7 +12,7 @@ export default function ServicesPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="relative bg-slate-300 overflow-hidden">
+        <div className="relative  overflow-hidden">
           <motion.div
             className="absolute top-1/3 w-full text-primary text-5xl font-bold text-center"
             initial={{ y: -50, opacity: 0 }}
