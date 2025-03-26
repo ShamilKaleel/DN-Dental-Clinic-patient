@@ -1,18 +1,36 @@
 import { AboutUs, Doctor } from "../assets/index";
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function AboutPage() {
+  const [aboutUsImageLoaded, setAboutUsImageLoaded] = useState(false);
+  const [doctorImageLoaded, setDoctorImageLoaded] = useState(false);
+
   return (
     <>
       <section className="w-full max-w-screen-xl m-auto grid grid-cols-1 lg:grid-cols-2 gap-10 mt-[120px] xl:mt-[150px] px-5">
-        <motion.img
-          src={AboutUs}
-          alt="About DN Dental Clinic"
-          className="rounded-2xl"
-          initial={{ opacity: 0, x: -50 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-        />
+        <div className="relative">
+          {/* Loading placeholder for AboutUs image */}
+          {!aboutUsImageLoaded && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center rounded-2xl">
+              <span className="text-gray-500">Loading...</span>
+            </div>
+          )}
+
+          <motion.img
+            src={AboutUs}
+            alt="About DN Dental Clinic"
+            className="rounded-2xl"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            onLoad={() => setAboutUsImageLoaded(true)}
+            style={{
+              opacity: aboutUsImageLoaded ? 1 : 0,
+              transition: "opacity 0.5s ease-in-out",
+            }}
+          />
+        </div>
 
         <motion.div
           className="flex justify-center ml-10 flex-col gap-5 lg:items-start items-center"
@@ -103,6 +121,13 @@ export default function AboutPage() {
             </motion.p>
           </motion.div>
           <div className="flex justify-center relative">
+            {/* Loading placeholder for Doctor image */}
+            {!doctorImageLoaded && (
+              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
+                <span className="text-gray-500">Loading...</span>
+              </div>
+            )}
+
             <motion.img
               src={Doctor}
               alt="DN Dental Clinic Doctor"
@@ -111,6 +136,11 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.4 }}
+              onLoad={() => setDoctorImageLoaded(true)}
+              style={{
+                opacity: doctorImageLoaded ? 1 : 0,
+                transition: "opacity 0.5s ease-in-out",
+              }}
             />
           </div>
         </div>
