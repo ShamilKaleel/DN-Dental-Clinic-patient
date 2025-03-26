@@ -122,11 +122,6 @@ export default function AboutPage() {
           </motion.div>
           <div className="flex justify-center relative">
             {/* Loading placeholder for Doctor image */}
-            {!doctorImageLoaded && (
-              <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-                <span className="text-gray-500">Loading...</span>
-              </div>
-            )}
 
             <motion.img
               src={Doctor}
