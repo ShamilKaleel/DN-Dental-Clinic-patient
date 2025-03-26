@@ -18,7 +18,7 @@ export default function Try3() {
               Frequently Asked Questions
             </h2>
             <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">
-              Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+              Answers to common questions about our dental care and services.
             </p>
           </div>
 
@@ -65,18 +65,7 @@ export default function Try3() {
                   }}
                 >
                   <div className="px-4 pb-5 sm:px-6 sm:pb-6">
-                    <p>
-                      {faq.answer}
-                      <a
-                        href="#"
-                        title=""
-                        className="text-blue-600 transition-all duration-200 hover:underline"
-                      >
-                        aliqua dolor
-                      </a>{" "}
-                      do amet sint. Velit officia consequat duis enim velit
-                      mollit.
-                    </p>
+                    <p>{faq.answer}</p>
                   </div>
                 </div>
               </div>
@@ -100,19 +89,23 @@ export default function Try3() {
 
 const faqData = [
   {
-    question: "How to create an account?",
-    answer: "Amet minim mollit non deserunt ullamco est sit aliqua dolor.",
+    question: "How often should I visit the dentist?",
+    answer:
+      "It is recommended to visit the dentist every six months for a routine check-up and cleaning.",
   },
   {
-    question: "How can I make payment using Paypal?",
-    answer: "Velit officia consequat duis enim velit mollit aliqua dolor.",
+    question: "Does teeth whitening damage my teeth?",
+    answer:
+      "No, professional teeth whitening is safe when done by a dentist. Overuse of whitening products at home can cause sensitivity.",
   },
   {
-    question: "Can I cancel my plan?",
-    answer: "Amet minim mollit non deserunt ullamco est sit aliqua dolor.",
+    question: "What should I do if I have a toothache?",
+    answer:
+      "Rinse your mouth with warm water, floss to remove any trapped food, and take a pain reliever. If the pain persists, visit your dentist as soon as possible.",
   },
   {
-    question: "How can I reach to support?",
-    answer: "Velit officia consequat duis enim velit mollit aliqua dolor.",
+    question: "Do you accept insurance?",
+    answer:
+      "Yes, we accept most dental insurance plans. Please contact us for more details about coverage and payment options.",
   },
 ];
