@@ -20,7 +20,7 @@ export default function Services() {
           <motion.img
             src={service.image}
             alt=""
-            className="aspect-3/2 bg-slate-400 rounded-xl object-cover"
+            className="aspect-3/2  rounded-xl object-cover"
             initial={{ scale: 0.9, opacity: 0.8 }}
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}

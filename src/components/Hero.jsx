@@ -139,7 +139,7 @@ export default function Hero() {
 
             {/* Main image with container */}
             <motion.div
-              className="relative overflow-hidden rounded-3xl shadow-2xl"
+              className="relative overflow-hidden rounded-3xl "
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.7 }}

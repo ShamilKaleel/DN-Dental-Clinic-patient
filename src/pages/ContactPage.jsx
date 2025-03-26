@@ -29,7 +29,7 @@ export default function ContactPage() {
           <motion.img
             src={ContactusBanner}
             alt="description of the image"
-            className="h-[258px] w-full object-cover mx-auto bg-slate-500"
+            className="h-[258px] w-full object-cover mx-auto "
             initial={{ scale: 1.1 }}
             animate={{ scale: 1 }}
             transition={{ duration: 1.2 }}
