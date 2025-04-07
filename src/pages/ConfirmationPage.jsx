@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import axiosInstance from "../api/axiosInstance";
+import { FaFileArrowDown } from "react-icons/fa6";
+import generateBookingPDF from "../utils/PDFGenerator";
+
 export default function ConfirmationPage() {
   const { id, contactNumber } = useParams();
 
@@ -33,6 +36,10 @@ export default function ConfirmationPage() {
     fetchSchedule();
   }, []);
 
+  const handleDownloadPDF = () => {
+    generateBookingPDF(booking);
+  };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-96">
@@ -48,6 +55,7 @@ export default function ConfirmationPage() {
       </div>
     );
   }
+
   return (
     <>
       <div className="mt-[92px] h-[500px]">
@@ -110,12 +118,19 @@ export default function ConfirmationPage() {
                     </div>
                   </li>
                   <li className="flex justify-between">
-                    <div className="text-gray-500">Appoinment Number </div>
+                    <div className="text-gray-500">Appointment Number </div>
                     <div className="text-black font-semibold">
                       {booking.appointmentNumber}
                     </div>
                   </li>
                 </ul>
+                <button
+                  onClick={handleDownloadPDF}
+                  className="flex gap-1 items-center justify-center w-full bg-primary text-white py-2 px-4 rounded-md hover:bg-teal-700 transition-colors"
+                >
+                  <FaFileArrowDown />
+                  <span>Download PDF</span>
+                </button>
               </div>
             </div>
           </div>
