@@ -60,12 +60,8 @@ export default function ConfirmationPage() {
                   <HiCheck className="text-3xl text-white   " />
                 </span>
               </div>
-              <div className="text-center text-gray-500 pb-3">
-                Payment Success!{" "}
-              </div>
-              <div className="text-center text-2xl text-black font-semibold pb-3 ">
-                Rs 250.00
-              </div>
+              <div className="text-center text-gray-500 pb-3">Success! </div>
+              <div className="text-center text-2xl text-black font-semibold pb-3 "></div>
               <div className="w-full border-b border-gray-200"></div>
               <div className="p-5">
                 <ul className="flex flex-col gap-3 pb-5">

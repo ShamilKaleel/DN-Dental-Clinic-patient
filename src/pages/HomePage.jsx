@@ -50,7 +50,7 @@ export default function HomePage() {
       </motion.section>
 
       <motion.section
-        className="  px-5  xl:px-20"
+        className="px-5 xl:px-20"
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -59,7 +59,16 @@ export default function HomePage() {
         <ResultBar />
       </motion.section>
 
-      <ImageGallery />
+      {/* Image Gallery Section - Full Width */}
+      <motion.section
+        className="mt-24 w-full"
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <ImageGallery />
+      </motion.section>
 
       <motion.section
         className="mt-24 px-5 flex flex-col gap-20"

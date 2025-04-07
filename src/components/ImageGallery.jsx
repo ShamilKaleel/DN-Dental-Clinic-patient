@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Expand, X, ChevronLeft, ChevronRight } from "lucide-react";
 
-const EnhancedImageGallery = ({ images = [] }) => {
+const ImageGallery = ({ images = [], fullWidth = true }) => {
   const [selectedImage, setSelectedImage] = useState(null);
   const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const containerRef = useRef(null);
@@ -10,116 +10,116 @@ const EnhancedImageGallery = ({ images = [] }) => {
   const row2Ref = useRef(null);
   const row3Ref = useRef(null);
 
-  // Sample default images using real URLs
+  // Default images using files from public folder
   const defaultImages = [
     // Row 1
     {
-      src: "https://source.unsplash.com/400x300/?university",
-      alt: "Professor teaching",
-      title: "Academic Excellence",
-      description: "Experienced faculty delivering quality education",
+      src: "/1.jpeg",
+      alt: "Dental clinic image 1",
+      title: "Professional Environment",
+      description: "Our modern dental facility",
       row: 1,
     },
     {
-      src: "https://source.unsplash.com/400x300/?concert",
-      alt: "Concert event",
-      title: "Cultural Events",
-      description: "Live performances and entertainment",
+      src: "/2.jpeg",
+      alt: "Dental clinic image 2",
+      title: "State-of-the-art Equipment",
+      description: "Using the latest dental technology",
       row: 1,
     },
     {
-      src: "https://source.unsplash.com/400x300/?rugby",
-      alt: "Rugby ball",
-      title: "Sports Activities",
-      description: "Promoting physical fitness and teamwork",
+      src: "/3.jpeg",
+      alt: "Dental clinic image 3",
+      title: "Patient Care",
+      description: "Comfortable treatment experience",
       row: 1,
     },
     {
-      src: "https://source.unsplash.com/400x300/?students",
-      alt: "Students celebrating",
-      title: "Student Life",
-      description: "Building lifelong friendships and memories",
+      src: "/4.jpeg",
+      alt: "Dental clinic image 4",
+      title: "Dental Procedures",
+      description: "High-quality dental treatments",
       row: 1,
     },
     {
-      src: "https://source.unsplash.com/400x300/?library",
-      alt: "Professor teaching",
-      title: "Academic Excellence",
-      description: "Experienced faculty delivering quality education",
+      src: "/5.jpeg",
+      alt: "Dental clinic image 5",
+      title: "Dental Expertise",
+      description: "Experienced dental professionals",
       row: 1,
     },
 
     // Row 2
     {
-      src: "https://source.unsplash.com/400x300/?technology",
-      alt: "Technology logo",
-      title: "Innovation Hub",
-      description: "Cutting-edge technology initiatives",
+      src: "/6.jpeg",
+      alt: "Dental clinic image 6",
+      title: "Friendly Staff",
+      description: "Our welcoming team members",
       row: 2,
     },
     {
-      src: "https://source.unsplash.com/400x300/?campus-life",
-      alt: "Campus activities",
-      title: "Campus Life",
-      description: "Engaging activities for students",
+      src: "/7.jpeg",
+      alt: "Dental clinic image 7",
+      title: "Dental Health Education",
+      description: "Learning about oral hygiene",
       row: 2,
     },
     {
-      src: "https://source.unsplash.com/400x300/?naval-officer",
-      alt: "Naval officer",
-      title: "Leadership Training",
-      description: "Developing future leaders",
+      src: "/8.jpeg",
+      alt: "Dental clinic image 8",
+      title: "Patient Consultation",
+      description: "Discussing treatment options",
       row: 2,
     },
     {
-      src: "https://source.unsplash.com/400x300/?performance",
-      alt: "Performance",
-      title: "Performing Arts",
-      description: "Showcasing talent and creativity",
+      src: "/9.jpeg",
+      alt: "Dental clinic image 9",
+      title: "Dental Checkups",
+      description: "Regular dental maintenance",
       row: 2,
     },
     {
-      src: "https://source.unsplash.com/400x300/?innovation",
-      alt: "Technology logo",
-      title: "Innovation Hub",
-      description: "Cutting-edge technology initiatives",
+      src: "/10.jpeg",
+      alt: "Dental clinic image 10",
+      title: "Advanced Treatments",
+      description: "Specialized dental procedures",
       row: 2,
     },
 
     // Row 3
     {
-      src: "https://source.unsplash.com/400x300/?campus-greenery",
-      alt: "Campus greenery",
-      title: "Campus Beauty",
-      description: "Our beautiful and sustainable campus",
+      src: "/11.jpeg",
+      alt: "Dental clinic image 11",
+      title: "Dental Care",
+      description: "Comprehensive oral health services",
       row: 3,
     },
     {
-      src: "https://source.unsplash.com/400x300/?community-outreach",
-      alt: "Children activities",
-      title: "Community Outreach",
-      description: "Engaging with our local community",
+      src: "/1.jpeg",
+      alt: "Dental clinic image 1",
+      title: "Clinic Environment",
+      description: "Comfortable dental setting",
       row: 3,
     },
     {
-      src: "https://source.unsplash.com/400x300/?collaboration",
-      alt: "Students together",
-      title: "Collaboration",
-      description: "Working together to achieve more",
+      src: "/2.jpeg",
+      alt: "Dental clinic image 2",
+      title: "Patient Satisfaction",
+      description: "Delivering quality care",
       row: 3,
     },
     {
-      src: "https://source.unsplash.com/400x300/?campus-entrance",
-      alt: "Campus entrance",
-      title: "Our Institution",
-      description: "A place of learning and growth",
+      src: "/3.jpeg",
+      alt: "Dental clinic image 3",
+      title: "Dental Services",
+      description: "Various treatment options",
       row: 3,
     },
     {
-      src: "https://source.unsplash.com/400x300/?campus-park",
-      alt: "Campus greenery",
-      title: "Campus Beauty",
-      description: "Our beautiful and sustainable campus",
+      src: "/4.jpeg",
+      alt: "Dental clinic image 4",
+      title: "Dental Professionals",
+      description: "Our skilled dental team",
       row: 3,
     },
   ];
@@ -151,45 +151,85 @@ const EnhancedImageGallery = ({ images = [] }) => {
     offset: ["start end", "end start"],
   });
 
-  // Auto-scroll function
+  // Auto-scroll function with medium speed
   useEffect(() => {
     if (!isAutoScrolling) return;
 
+    // Different scroll speeds for different device sizes (medium pace)
+    const getScrollSpeed = () => {
+      // Adapt speed based on screen width - reduced to medium pace
+      if (window.innerWidth >= 1280) return 0.7; // XL screens
+      if (window.innerWidth >= 1024) return 0.5; // Large screens
+      return 0.4; // Default for smaller screens
+    };
+
+    const speed = getScrollSpeed();
+
     const interval = setInterval(() => {
       if (row1Ref.current) {
-        row1Ref.current.scrollLeft += 1;
-        // Reset scroll position when reached the end
-        if (
+        row1Ref.current.scrollLeft += speed;
+
+        // Check if we need to reset (we're near the end)
+        const isNearEnd =
           row1Ref.current.scrollLeft >=
-          row1Ref.current.scrollWidth - row1Ref.current.clientWidth - 5
-        ) {
+          row1Ref.current.scrollWidth - row1Ref.current.clientWidth - 10;
+
+        if (isNearEnd) {
           row1Ref.current.scrollLeft = 0;
         }
       }
 
       if (row2Ref.current) {
-        row2Ref.current.scrollLeft -= 1;
-        // Reset scroll position when reached the beginning
-        if (row2Ref.current.scrollLeft <= 5) {
+        row2Ref.current.scrollLeft -= speed;
+
+        // Check if we need to reset (we're near the beginning)
+        const isNearStart = row2Ref.current.scrollLeft <= 10;
+
+        if (isNearStart) {
           row2Ref.current.scrollLeft =
             row2Ref.current.scrollWidth - row2Ref.current.clientWidth;
         }
       }
 
       if (row3Ref.current) {
-        row3Ref.current.scrollLeft += 1;
-        // Reset scroll position when reached the end
-        if (
+        row3Ref.current.scrollLeft += speed;
+
+        // Check if we need to reset (we're near the end)
+        const isNearEnd =
           row3Ref.current.scrollLeft >=
-          row3Ref.current.scrollWidth - row3Ref.current.clientWidth - 5
-        ) {
+          row3Ref.current.scrollWidth - row3Ref.current.clientWidth - 10;
+
+        if (isNearEnd) {
           row3Ref.current.scrollLeft = 0;
         }
       }
-    }, 30);
+    }, 30); // Slower interval for more relaxed scrolling
 
-    return () => clearInterval(interval);
+    // Handle window resize to adjust scroll behavior
+    const handleResize = () => {
+      // Force reset scroll positions on resize to avoid getting stuck
+      if (row1Ref.current) row1Ref.current.scrollLeft = 0;
+      if (row2Ref.current)
+        row2Ref.current.scrollLeft = row2Ref.current.scrollWidth / 2;
+      if (row3Ref.current) row3Ref.current.scrollLeft = 0;
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [isAutoScrolling]);
+
+  // Initialize row positions after component mounts
+  useEffect(() => {
+    // Set initial positions
+    if (row1Ref.current) row1Ref.current.scrollLeft = 0;
+    if (row2Ref.current)
+      row2Ref.current.scrollLeft = row2Ref.current.scrollWidth / 2;
+    if (row3Ref.current) row3Ref.current.scrollLeft = 0;
+  }, []);
 
   // Pause auto-scroll when hovering
   const handleMouseEnter = () => setIsAutoScrolling(false);
@@ -219,12 +259,9 @@ const EnhancedImageGallery = ({ images = [] }) => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="w-full py-8 relative overflow-hidden rounded-3xl"
-    >
+    <div ref={containerRef} className="w-full relative overflow-hidden">
       <motion.div
-        className="w-full max-w-screen-xl m-auto flex flex-col relative z-10"
+        className="w-full flex flex-col relative z-10"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, margin: "-100px" }}
@@ -248,7 +285,7 @@ const EnhancedImageGallery = ({ images = [] }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            Campus Life & Activities
+            Dental Care Excellence
           </motion.h2>
 
           <motion.p
@@ -258,7 +295,7 @@ const EnhancedImageGallery = ({ images = [] }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Explore our vibrant community through these captured moments
+            Explore our clinic and services through these captured moments
           </motion.p>
         </div>
         <div className="flex flex-col">
@@ -271,36 +308,40 @@ const EnhancedImageGallery = ({ images = [] }) => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              {rows[0]?.images.map((image, imgIndex) => (
-                <motion.div
-                  key={imgIndex}
-                  className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 * Math.min(imgIndex, 5),
-                  }}
-                  whileHover={{ scale: 1.05, zIndex: 10 }}
-                  onClick={() => openLightbox(image)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt || `Gallery image ${imgIndex + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
-                    <h3 className="text-white font-semibold text-sm">
-                      {image.title}
-                    </h3>
-                    <p className="text-gray-200 text-xs truncate">
-                      {image.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Duplicate first set of images for continuous scrolling */}
+              {[...rows[0]?.images, ...rows[0]?.images].map(
+                (image, imgIndex) => (
+                  <motion.div
+                    key={`row1-${imgIndex}`}
+                    className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay:
+                        0.1 * Math.min(imgIndex % rows[0]?.images.length, 5),
+                    }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
+                    onClick={() => openLightbox(image)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt || `Gallery image ${imgIndex + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
+                      <h3 className="text-white font-semibold text-sm">
+                        {image.title}
+                      </h3>
+                      <p className="text-gray-200 text-xs truncate">
+                        {image.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                )
+              )}
             </div>
 
             {/* Navigation arrows */}
@@ -327,36 +368,40 @@ const EnhancedImageGallery = ({ images = [] }) => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              {rows[1]?.images.map((image, imgIndex) => (
-                <motion.div
-                  key={imgIndex}
-                  className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 * Math.min(imgIndex, 5),
-                  }}
-                  whileHover={{ scale: 1.05, zIndex: 10 }}
-                  onClick={() => openLightbox(image)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt || `Gallery image ${imgIndex + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
-                    <h3 className="text-white font-semibold text-sm">
-                      {image.title}
-                    </h3>
-                    <p className="text-gray-200 text-xs truncate">
-                      {image.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Duplicate second set of images for continuous scrolling */}
+              {[...rows[1]?.images, ...rows[1]?.images].map(
+                (image, imgIndex) => (
+                  <motion.div
+                    key={`row2-${imgIndex}`}
+                    className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay:
+                        0.1 * Math.min(imgIndex % rows[1]?.images.length, 5),
+                    }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
+                    onClick={() => openLightbox(image)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt || `Gallery image ${imgIndex + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
+                      <h3 className="text-white font-semibold text-sm">
+                        {image.title}
+                      </h3>
+                      <p className="text-gray-200 text-xs truncate">
+                        {image.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                )
+              )}
             </div>
 
             {/* Navigation arrows */}
@@ -383,36 +428,40 @@ const EnhancedImageGallery = ({ images = [] }) => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              {rows[2]?.images.map((image, imgIndex) => (
-                <motion.div
-                  key={imgIndex}
-                  className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.5,
-                    delay: 0.1 * Math.min(imgIndex, 5),
-                  }}
-                  whileHover={{ scale: 1.05, zIndex: 10 }}
-                  onClick={() => openLightbox(image)}
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt || `Gallery image ${imgIndex + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
-                    <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
-                    <h3 className="text-white font-semibold text-sm">
-                      {image.title}
-                    </h3>
-                    <p className="text-gray-200 text-xs truncate">
-                      {image.description}
-                    </p>
-                  </div>
-                </motion.div>
-              ))}
+              {/* Duplicate third set of images for continuous scrolling */}
+              {[...rows[2]?.images, ...rows[2]?.images].map(
+                (image, imgIndex) => (
+                  <motion.div
+                    key={`row3-${imgIndex}`}
+                    className="relative flex-shrink-0 w-64 h-48 overflow-hidden cursor-pointer"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{
+                      duration: 0.5,
+                      delay:
+                        0.1 * Math.min(imgIndex % rows[2]?.images.length, 5),
+                    }}
+                    whileHover={{ scale: 1.05, zIndex: 10 }}
+                    onClick={() => openLightbox(image)}
+                  >
+                    <img
+                      src={image.src}
+                      alt={image.alt || `Gallery image ${imgIndex + 1}`}
+                      className="w-full h-full object-cover transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-4">
+                      <Expand className="absolute top-2 right-2 w-5 h-5 text-white" />
+                      <h3 className="text-white font-semibold text-sm">
+                        {image.title}
+                      </h3>
+                      <p className="text-gray-200 text-xs truncate">
+                        {image.description}
+                      </p>
+                    </div>
+                  </motion.div>
+                )
+              )}
             </div>
 
             {/* Navigation arrows */}
@@ -431,6 +480,8 @@ const EnhancedImageGallery = ({ images = [] }) => {
           </div>
         </div>
       </motion.div>
+
+      {/* Lightbox for viewing selected image */}
       {selectedImage && (
         <motion.div
           className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
@@ -468,4 +519,4 @@ const EnhancedImageGallery = ({ images = [] }) => {
   );
 };
 
-export default EnhancedImageGallery;
+export default ImageGallery;
