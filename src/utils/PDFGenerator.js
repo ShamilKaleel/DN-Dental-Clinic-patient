@@ -50,7 +50,6 @@ export const generateBookingPDF = (bookingDetails) => {
     (doc.internal.pageSize.getWidth() - confirmationTextWidth) / 2;
   doc.text(confirmationText, confirmationX, 48);
 
-  // Booking details
   doc.setFontSize(12);
   doc.setFont("helvetica", "normal");
 
