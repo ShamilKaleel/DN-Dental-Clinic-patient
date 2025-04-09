@@ -376,7 +376,7 @@ export default function AboutPage() {
                 href="/booking"
                 className="bg-white hover:bg-gray-50 text-primary border-2 border-primary px-8 py-3 rounded-lg font-medium transition-all"
               >
-                Book Appointment
+                Book Now
               </a>
             </motion.div>
           </div>

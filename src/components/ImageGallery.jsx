@@ -275,7 +275,9 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
           >
-            <span className="text-sm font-medium">Our Gallery</span>
+            <span className="px-4 py-1 bg-primary/10 rounded-full text-primary text-sm font-medium inline-block">
+              Our Gallery
+            </span>
           </motion.div>
 
           <motion.h2

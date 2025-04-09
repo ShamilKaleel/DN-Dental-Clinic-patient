@@ -71,21 +71,47 @@ export default function HomePage() {
       </motion.section>
 
       <motion.section
-        className="mt-24 px-5 flex flex-col gap-20"
+        className="mt-24 px-5 flex flex-col gap-8" // Changed from gap-20 to gap-8
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        <motion.h1
-          className="font-semibold text-primary text-center text-3xl lg:text-4xl"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          Services we provide{" "}
-        </motion.h1>
+        <div className="text-center mb-8">
+          {" "}
+          {/* Changed from mb-16 to mb-8 */}
+          <motion.div
+            className="inline-block mb-3"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="px-4 py-1 bg-primary/10 rounded-full text-primary text-sm font-medium inline-block">
+              Dental Excellence
+            </div>
+          </motion.div>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold text-gray-800"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Our Specialized Services
+          </motion.h2>
+          <motion.p
+            className="max-w-2xl mx-auto text-gray-600"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            Discover our comprehensive range of dental treatments designed with
+            your comfort and health in mind. Our expert team uses the latest
+            technology to deliver exceptional care.
+          </motion.p>
+        </div>
         <Services />
       </motion.section>
 
