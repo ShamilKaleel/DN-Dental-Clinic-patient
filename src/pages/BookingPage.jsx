@@ -1,9 +1,3 @@
-// import Doctor from "../components/Doctor";
-// import Schedule from "../components/Schedule";
-// import Loader from "../components/Loader";
-// import axiosInstance from "../api/axiosInstance";
-// import { useEffect, useState } from "react";
-
 import Doctor from "../components/Doctor";
 import Schedule from "../components/Schedule";
 import Loader from "../components/Loader";
