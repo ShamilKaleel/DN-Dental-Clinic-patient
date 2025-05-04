@@ -13,16 +13,11 @@ import ImageGallery from "../components/ImageGallery";
 
 export default function HomePage() {
   const [showForm, setShowForm] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [successVisible, setSuccessVisible] = useState(false);
 
   const handleFormSubmit = () => {
     setShowForm(false); // First close the form
-    setIsSubmitted(true); // Then show success message
-
-    // Automatically hide the success message after 2 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 2000);
+    setSuccessVisible(true); // Show success message
   };
 
   // Prevent background scrolling when form is open
@@ -71,15 +66,13 @@ export default function HomePage() {
       </motion.section>
 
       <motion.section
-        className="mt-24 px-5 flex flex-col gap-8" // Changed from gap-20 to gap-8
+        className="mt-24 px-5 flex flex-col gap-8"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         <div className="text-center mb-8">
-          {" "}
-          {/* Changed from mb-16 to mb-8 */}
           <motion.div
             className="inline-block mb-3"
             initial={{ opacity: 0, scale: 0.8 }}
@@ -125,14 +118,20 @@ export default function HomePage() {
         <FeedbackBanner setShowForm={setShowForm} />
       </motion.section>
 
-      {/* Success message without animations */}
-      {isSubmitted && (
-        <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-          <SuccessMessage />
-        </div>
-      )}
+      {/* Success message */}
+      <div
+        className={`fixed inset-0 flex items-center justify-center z-50  pointer-events-none ${
+          successVisible ? "bg-black bg-opacity-50" : ""
+        }`}
+      >
+        <SuccessMessage
+          isVisible={successVisible}
+          duration={3000}
+          onClose={() => setSuccessVisible(false)}
+        />
+      </div>
 
-      {/* Feedback form without animations */}
+      {/* Feedback form */}
       {showForm && (
         <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
           <FeedbackForm
