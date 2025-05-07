@@ -5,7 +5,6 @@ import {
   ServiceRootCanalTreatment,
   ServiceWisdomTeethExtraction,
   ServiceTeethWhitening,
-  Hhro,
   Doctor,
 } from "../assets/index";
 
