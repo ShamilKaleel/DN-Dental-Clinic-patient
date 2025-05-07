@@ -149,7 +149,7 @@ const ModernTestimonialSlider = () => {
   // Loading state UI
   if (isLoading) {
     return (
-      <div className="w-full max-w-screen-xl mx-auto px-5 xl:px-20 py-16">
+      <div className="w-full max-w-screen-xl mx-auto px-5 xl:px-20 pt-16">
         <div className="flex justify-center">
           <div className="flex space-x-1">
             <div className="w-3 h-3 bg-primary rounded-full animate-bounce"></div>

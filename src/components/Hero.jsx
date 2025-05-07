@@ -44,16 +44,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            DN Dental Clinic :
-          </motion.h1>
-
-          <motion.h1
-            className="sm:text-6xl text-5xl font-bold text-text-headers"
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-          >
-            A Casual Meetup for
+            Book Your Dental Visit
           </motion.h1>
 
           <motion.h1
@@ -62,7 +53,7 @@ export default function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.4 }}
           >
-            Dental Professionals
+            In Just a Few Clicks
           </motion.h1>
 
           <motion.p
@@ -71,8 +62,8 @@ export default function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.6 }}
           >
-            Join our community of dental experts in a relaxed environment. Share
-            knowledge, build connections, and advance your career.
+            Book your dental appointment with ease—one trusted doctor,
+            personalized care, and timely reminders, all in one place.
           </motion.p>
 
           <motion.div

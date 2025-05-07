@@ -46,13 +46,13 @@ export default function Footer() {
 
   const contactUs = [
     {
-      title: "236, Colombo street, Colombo, Sri Lanka",
+      title: "DN Dental Clinic, A4, Karaitivu 32250, Sri Lanka",
     },
     {
-      title: "+94 771626369",
+      title: "+94 763463948",
     },
     {
-      title: "DnDentalClinic@gmail.com",
+      title: "dndentalcliniclk@gmail.com",
     },
   ];
 

@@ -9,20 +9,17 @@ export default function ContactPage() {
 
   return (
     <>
+      {/* Banner section with animation and loading state management */}
       <motion.section
-        className="mt-[92px]"
+        className="mt-[92px]" // Margin top to account for fixed header
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
         <div className="relative overflow-hidden">
-          {/* Loading placeholder */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-              <span className="text-gray-500">Loading...</span>
-            </div>
-          )}
+          {/* Loading placeholder - shows when image is loading */}
 
+          {/* Page title with conditional z-index based on image loading */}
           <motion.div
             className={`absolute top-1/3 w-full text-primary text-5xl font-bold text-center ${
               imageLoaded ? "z-10" : "z-0"
@@ -39,6 +36,7 @@ export default function ContactPage() {
             Contact Us
           </motion.div>
 
+          {/* Banner image with loading detection */}
           <motion.img
             src={ContactusBanner}
             alt="Contact us banner"
@@ -55,6 +53,7 @@ export default function ContactPage() {
         </div>
       </motion.section>
 
+      {/* Contact form section with animation */}
       <motion.section
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -64,6 +63,7 @@ export default function ContactPage() {
         <ContactForm />
       </motion.section>
 
+      {/* Location section with animation */}
       <motion.section
         className="mt-24"
         initial={{ opacity: 0, y: 40 }}
