@@ -3,6 +3,7 @@ import FeedbackForm from "../components/FeedbackForm";
 import Hero from "../components/Hero";
 import ResultBar from "../components/ResultBar";
 import Services from "../components/Services";
+import EnhancedTestimonialSlider from "../components/TestimonialSlider"; // Import the new component
 import { useState, useEffect } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -52,6 +53,16 @@ export default function HomePage() {
         transition={{ duration: 0.8 }}
       >
         <ResultBar />
+      </motion.section>
+
+      {/* New Testimonial Component */}
+      <motion.section
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <EnhancedTestimonialSlider />
       </motion.section>
 
       {/* Image Gallery Section - Full Width */}
@@ -120,7 +131,7 @@ export default function HomePage() {
 
       {/* Success message */}
       <div
-        className={`fixed inset-0 flex items-center justify-center z-50  pointer-events-none ${
+        className={`fixed inset-0 flex items-center justify-center z-50 pointer-events-none ${
           successVisible ? "bg-black bg-opacity-50" : ""
         }`}
       >

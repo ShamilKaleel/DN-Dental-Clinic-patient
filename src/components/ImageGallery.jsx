@@ -4,7 +4,6 @@ import { Expand, X, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ImageGallery = ({ images = [], fullWidth = true }) => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [isAutoScrolling, setIsAutoScrolling] = useState(true);
   const containerRef = useRef(null);
   const row1Ref = useRef(null);
   const row2Ref = useRef(null);
@@ -145,19 +144,33 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
     }))
     .sort((a, b) => a.rowNum - b.rowNum);
 
+  // Make sure we have all three rows with fallback data
+  const ensuredRows = [
+    rows.find((r) => r.rowNum === 1) || {
+      rowNum: 1,
+      images: defaultImages.filter((img) => img.row === 1),
+    },
+    rows.find((r) => r.rowNum === 2) || {
+      rowNum: 2,
+      images: defaultImages.filter((img) => img.row === 2),
+    },
+    rows.find((r) => r.rowNum === 3) || {
+      rowNum: 3,
+      images: defaultImages.filter((img) => img.row === 3),
+    },
+  ];
+
   // Scroll animation on page scroll
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   });
 
-  // Auto-scroll function with medium speed
+  // Auto-scroll function that always runs
   useEffect(() => {
-    if (!isAutoScrolling) return;
-
-    // Different scroll speeds for different device sizes (medium pace)
+    // Different scroll speeds for different device sizes
     const getScrollSpeed = () => {
-      // Adapt speed based on screen width - reduced to medium pace
+      // Adapt speed based on screen width
       if (window.innerWidth >= 1280) return 0.7; // XL screens
       if (window.innerWidth >= 1024) return 0.5; // Large screens
       return 0.4; // Default for smaller screens
@@ -220,7 +233,7 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
       clearInterval(interval);
       window.removeEventListener("resize", handleResize);
     };
-  }, [isAutoScrolling]);
+  }, []);
 
   // Initialize row positions after component mounts
   useEffect(() => {
@@ -231,20 +244,14 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
     if (row3Ref.current) row3Ref.current.scrollLeft = 0;
   }, []);
 
-  // Pause auto-scroll when hovering
-  const handleMouseEnter = () => setIsAutoScrolling(false);
-  const handleMouseLeave = () => setIsAutoScrolling(true);
-
   // Open image in lightbox
   const openLightbox = (image) => {
     setSelectedImage(image);
-    setIsAutoScrolling(false);
   };
 
   // Close the lightbox
   const closeLightbox = () => {
     setSelectedImage(null);
-    setIsAutoScrolling(true);
   };
 
   // Manual scroll handler for row
@@ -307,11 +314,9 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
               ref={row1Ref}
               className="flex overflow-x-auto scrollbar-hide h-48"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               {/* Duplicate first set of images for continuous scrolling */}
-              {[...rows[0]?.images, ...rows[0]?.images].map(
+              {[...ensuredRows[0].images, ...ensuredRows[0].images].map(
                 (image, imgIndex) => (
                   <motion.div
                     key={`row1-${imgIndex}`}
@@ -322,7 +327,8 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
                     transition={{
                       duration: 0.5,
                       delay:
-                        0.1 * Math.min(imgIndex % rows[0]?.images.length, 5),
+                        0.1 *
+                        Math.min(imgIndex % ensuredRows[0].images.length, 5),
                     }}
                     whileHover={{ scale: 1.05, zIndex: 10 }}
                     onClick={() => openLightbox(image)}
@@ -367,11 +373,9 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
               ref={row2Ref}
               className="flex overflow-x-auto scrollbar-hide h-48"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               {/* Duplicate second set of images for continuous scrolling */}
-              {[...rows[1]?.images, ...rows[1]?.images].map(
+              {[...ensuredRows[1].images, ...ensuredRows[1].images].map(
                 (image, imgIndex) => (
                   <motion.div
                     key={`row2-${imgIndex}`}
@@ -382,7 +386,8 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
                     transition={{
                       duration: 0.5,
                       delay:
-                        0.1 * Math.min(imgIndex % rows[1]?.images.length, 5),
+                        0.1 *
+                        Math.min(imgIndex % ensuredRows[1].images.length, 5),
                     }}
                     whileHover={{ scale: 1.05, zIndex: 10 }}
                     onClick={() => openLightbox(image)}
@@ -427,11 +432,9 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
               ref={row3Ref}
               className="flex overflow-x-auto scrollbar-hide h-48"
               style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
             >
               {/* Duplicate third set of images for continuous scrolling */}
-              {[...rows[2]?.images, ...rows[2]?.images].map(
+              {[...ensuredRows[2].images, ...ensuredRows[2].images].map(
                 (image, imgIndex) => (
                   <motion.div
                     key={`row3-${imgIndex}`}
@@ -442,7 +445,8 @@ const ImageGallery = ({ images = [], fullWidth = true }) => {
                     transition={{
                       duration: 0.5,
                       delay:
-                        0.1 * Math.min(imgIndex % rows[2]?.images.length, 5),
+                        0.1 *
+                        Math.min(imgIndex % ensuredRows[2].images.length, 5),
                     }}
                     whileHover={{ scale: 1.05, zIndex: 10 }}
                     onClick={() => openLightbox(image)}

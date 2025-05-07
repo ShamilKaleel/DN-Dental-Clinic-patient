@@ -9,6 +9,7 @@ export default function ServicesPage() {
 
   return (
     <>
+      {/* Banner Section with animated title */}
       <motion.section
         className="mt-[92px]"
         initial={{ opacity: 0 }}
@@ -16,13 +17,7 @@ export default function ServicesPage() {
         transition={{ duration: 0.8 }}
       >
         <div className="relative overflow-hidden">
-          {/* Loading placeholder */}
-          {!imageLoaded && (
-            <div className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center">
-              <span className="text-gray-500">Loading...</span>
-            </div>
-          )}
-
+          {/* Page title overlaid on banner image */}
           <motion.div
             className={`absolute top-1/3 w-full text-primary text-5xl font-bold text-center ${
               imageLoaded ? "z-10" : "z-0"
@@ -39,49 +34,52 @@ export default function ServicesPage() {
             Services we provide
           </motion.div>
 
+          {/* Banner image with scale animation */}
           <motion.img
             src={ServicesBanner}
             alt="Services banner"
-            className="h-[258px] w-full object-cover mx-auto"
-            initial={{ scale: 1.1 }}
-            animate={{ scale: 1 }}
-            transition={{ duration: 1.2 }}
-            onLoad={() => setImageLoaded(true)}
+            className="h-[258px] w-full object-cover mx-auto" // Fixed height, full width, centered
+            initial={{ scale: 1.1 }} // Start slightly zoomed in
+            animate={{ scale: 1 }} // Animate to normal scale
+            transition={{ duration: 1.2 }} // Over 1.2 seconds
+            onLoad={() => setImageLoaded(true)} // Set image as loaded when it completes loading
             style={{
-              opacity: imageLoaded ? 1 : 0,
-              transition: "opacity 0.5s ease-in-out",
+              opacity: imageLoaded ? 1 : 0, // Only show image once loaded
+              transition: "opacity 0.5s ease-in-out", // Smooth opacity transition
             }}
           />
         </div>
       </motion.section>
 
+      {/* Services Section - using the Services component */}
       <motion.section
-        className="mt-24 px-5"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        className="mt-24 px-5" // Margin top and horizontal padding
+        initial={{ opacity: 0, y: 40 }} // Start below final position and invisible
+        whileInView={{ opacity: 1, y: 0 }} // Animate when scrolled into view
+        viewport={{ once: true, margin: "-100px" }} // Only animate once, with viewport margin
         transition={{
           duration: 0.7,
           type: "spring",
-          stiffness: 70,
+          stiffness: 70, // Lighter spring for smoother animation
         }}
       >
-        <Services />
+        <Services /> {/* Services component displays service cards */}
       </motion.section>
 
+      {/* FAQ Section - using the Faq component */}
       <motion.section
-        className="mt-32 px-5"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-100px" }}
+        className="mt-32 px-5" // Larger margin top to separate from services
+        initial={{ opacity: 0, y: 40 }} // Start below final position and invisible
+        whileInView={{ opacity: 1, y: 0 }} // Animate when scrolled into view
+        viewport={{ once: true, margin: "-100px" }} // Only animate once, with viewport margin
         transition={{
           duration: 0.7,
-          delay: 0.2,
+          delay: 0.2, // Slight delay for staggered animation after services
           type: "spring",
           stiffness: 70,
         }}
       >
-        <Faq />
+        <Faq /> {/* FAQ component with collapsible questions and answers */}
       </motion.section>
     </>
   );

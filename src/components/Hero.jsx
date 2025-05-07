@@ -1,8 +1,12 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { HeroImage } from "../assets/index";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 export default function Hero() {
+  // Track image loading state
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <section className="relative w-full max-w-screen-xl m-auto pt-10 pb-16 px-4 overflow-hidden">
       {/* Background decorative elements */}
@@ -100,23 +104,21 @@ export default function Hero() {
             className="mt-10 flex items-center gap-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 1 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
           >
-            <div className="flex -space-x-2">
+            <div className="flex -space-x-3">
               {[1, 2, 3].map((i) => (
                 <div
                   key={i}
-                  className={`w-10 h-10 rounded-full border-2 border-white bg-teal-${
-                    i * 100
-                  } flex items-center justify-center`}
+                  className="w-10 h-10 rounded-full border-2 border-white bg-gradient-to-br from-teal-500 to-teal-600 flex items-center justify-center"
                 >
                   <span className="text-xs text-white font-bold">DN</span>
                 </div>
               ))}
             </div>
-            <p className="text-sm text-gray-600">
-              <span className="font-bold text-primary">200+</span> dental
-              professionals already registered
+            <p className="text-sm text-gray-600 font-medium">
+              <span className="font-bold text-primary">15,000+</span> satisfied
+              patients trust our care
             </p>
           </motion.div>
         </div>
@@ -129,6 +131,13 @@ export default function Hero() {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <div className="relative">
+            {/* Image loading placeholder */}
+            {!imageLoaded && (
+              <div className="absolute inset-0 rounded-3xl flex items-center justify-center bg-gray-100 animate-pulse">
+                <div className="w-16 h-16 border-4 border-t-primary border-gray-200 rounded-full animate-spin"></div>
+              </div>
+            )}
+
             {/* Decorative ring */}
             <motion.div
               className="absolute inset-0 border-8 border-teal-100 rounded-full -m-6"
@@ -139,7 +148,7 @@ export default function Hero() {
 
             {/* Main image with container */}
             <motion.div
-              className="relative overflow-hidden rounded-3xl "
+              className="relative overflow-hidden rounded-3xl"
               initial={{ scale: 0.9 }}
               animate={{ scale: 1 }}
               transition={{ duration: 0.7 }}
@@ -148,17 +157,28 @@ export default function Hero() {
                 src={HeroImage}
                 alt="DN Dental Clinic"
                 className="object-cover"
+                onLoad={() => setImageLoaded(true)}
+                style={{
+                  opacity: imageLoaded ? 1 : 0,
+                  transition: "opacity 0.5s ease",
+                }}
               />
 
               {/* Floating badge */}
               <motion.div
-                className="absolute bottom-6 right-6  rounded-lg px-4 py-2 shadow-lg"
+                className="absolute bottom-6 right-6 bg-white/90 backdrop-blur-sm rounded-lg px-4 py-2 shadow-lg"
                 initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.2 }}
+                animate={{
+                  opacity: imageLoaded ? 1 : 0,
+                  y: imageLoaded ? 0 : 20,
+                }}
+                transition={{ duration: 0.5, delay: 0.2 }}
               >
                 <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <div className="relative">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="absolute inset-0 w-3 h-3 bg-green-500 rounded-full animate-ping opacity-75"></div>
+                  </div>
                   <span className="font-medium text-gray-800">
                     Appointments Available
                   </span>
